@@ -1,10 +1,27 @@
+.main {
+  margin-top: 68px;
+}
+
 .results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  list-style: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .categories {
   display: flex;
   flex-direction: column;
   margin: 12px;
+}
+
+.categories > li {
+  margin-bottom: 12px;
 }
