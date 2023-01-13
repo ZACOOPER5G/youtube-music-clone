@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import React, { useContext, useEffect } from "react";
 import MusicContext from "../context/MusicContext";
-import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Thumbnail from "../components/Thumbnail";
 
@@ -75,8 +74,6 @@ export default function Home({
       setCategories(spotifyCategories);
   }, []);
 
-  console.log(spotifyUser);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -89,7 +86,12 @@ export default function Home({
         <div className={styles.results}>
           {typeof categories.items !== "undefined"
             ? categories.items.map((category: any) => (
-                <Thumbnail key={category?.id} style={styles.categories} name={category?.name} src={category.icons?.[0].url} />
+                <Thumbnail
+                  key={category?.id}
+                  style={styles.categories}
+                  name={category?.name}
+                  src={category.icons?.[0].url}
+                />
               ))
             : "Loading..."}
         </div>
