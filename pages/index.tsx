@@ -4,6 +4,8 @@ import React, { useContext, useEffect } from "react";
 import MusicContext from "../context/MusicContext";
 import Navbar from "../components/Navbar";
 import Thumbnail from "../components/Thumbnail";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const getToken = async () => {
   let response = await fetch(`https://accounts.spotify.com/api/token`, {
@@ -66,13 +68,43 @@ export default function Home({
   spotifyFeaturedPlaylists,
   spotifyUser,
 }: any) {
-  const musicContext = useContext(MusicContext);
-  const { categories, setCategories } = musicContext;
 
+  // importing global states
+  const musicContext = useContext(MusicContext);
+  const { categories, setCategories, featuredPlaylists, setFeaturedPlaylists } = musicContext;
+
+  // setting global states
   useEffect(() => {
     if (typeof categories.items === "undefined" && spotifyCategories)
       setCategories(spotifyCategories);
+    if (
+      typeof featuredPlaylists.items === "undefined" &&
+      spotifyFeaturedPlaylists
+    )
+      setFeaturedPlaylists(spotifyFeaturedPlaylists);
   }, []);
+
+  console.log(featuredPlaylists);
+
+  // responsive config for carousel component
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 5,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
   return (
     <div className={styles.container}>
@@ -83,7 +115,12 @@ export default function Home({
       <Navbar />
       <main className={styles.main}>
         <h1>Categories:</h1>
-        <div className={styles.results}>
+        <Carousel
+          itemAriaLabel="yes"
+          responsive={responsive}
+          className={styles.results}
+          infinite={true}
+        >
           {typeof categories.items !== "undefined"
             ? categories.items.map((category: any) => (
                 <Thumbnail
@@ -94,7 +131,7 @@ export default function Home({
                 />
               ))
             : "Loading..."}
-        </div>
+        </Carousel>
       </main>
     </div>
   );

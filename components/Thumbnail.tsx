@@ -2,16 +2,14 @@ import React from "react";
 import Image from "next/image";
 
 type ThumbnailProps = {
-  key: string;
   style: any;
   name: string;
   src: string;
 };
 
-const Thumbnail = ({ key, style, name, src }: ThumbnailProps) => {
+const Thumbnail = ({ style, name, src }: ThumbnailProps) => {
   return (
-    <div key={key} className={style}>
-      <li>{name}</li>
+    <div className={style}>
       <Image
         alt="category icon"
         src={src}
@@ -19,6 +17,7 @@ const Thumbnail = ({ key, style, name, src }: ThumbnailProps) => {
         width={275}
         layout="responsive"
       />
+      <li>{name}</li>
     </div>
   );
 };
