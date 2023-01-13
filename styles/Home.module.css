@@ -1,19 +1,9 @@
 .main {
-  margin-top: 68px;
+  margin: 68px 12px 12px 12px;
 }
 
 .results {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  list-style: none;
-}
-
-@media only screen and (max-width: 1200px) {
-  .results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  max-height: 275px;
 }
 
 .categories {
@@ -23,5 +13,5 @@
 }
 
 .categories > li {
-  margin-bottom: 12px;
+  margin-top: 12px;
 }

@@ -114,7 +114,7 @@ export default function Home({
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <h1>Categories:</h1>
+        <h2>Categories:</h2>
         <Carousel
           itemAriaLabel="yes"
           responsive={responsive}
@@ -128,6 +128,24 @@ export default function Home({
                   style={styles.categories}
                   name={category?.name}
                   src={category.icons?.[0].url}
+                />
+              ))
+            : "Loading..."}
+        </Carousel>
+        <h2>Featured Playlists:</h2>
+        <Carousel
+          itemAriaLabel="yes"
+          responsive={responsive}
+          className={styles.results}
+          infinite={true}
+        >
+          {typeof featuredPlaylists.items !== "undefined"
+            ? featuredPlaylists.items.map((featured: any) => (
+                <Thumbnail
+                  key={featured?.id}
+                  style={styles.categories}
+                  name={featured?.name}
+                  src={featured.images?.[0].url}
                 />
               ))
             : "Loading..."}
