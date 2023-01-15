@@ -68,10 +68,10 @@ export default function Home({
   spotifyFeaturedPlaylists,
   spotifyUser,
 }: any) {
-
   // importing global states
   const musicContext = useContext(MusicContext);
-  const { categories, setCategories, featuredPlaylists, setFeaturedPlaylists } = musicContext;
+  const { categories, setCategories, featuredPlaylists, setFeaturedPlaylists } =
+    musicContext;
 
   // setting global states
   useEffect(() => {
@@ -83,8 +83,6 @@ export default function Home({
     )
       setFeaturedPlaylists(spotifyFeaturedPlaylists);
   }, []);
-
-  console.log(featuredPlaylists);
 
   // responsive config for carousel component
   const responsive = {
@@ -138,6 +136,7 @@ export default function Home({
           responsive={responsive}
           className={styles.results}
           infinite={true}
+          slidesToSlide={5}
         >
           {typeof featuredPlaylists.items !== "undefined"
             ? featuredPlaylists.items.map((featured: any) => (
@@ -146,6 +145,7 @@ export default function Home({
                   style={styles.categories}
                   name={featured?.name}
                   src={featured.images?.[0].url}
+                  description={featured?.description}
                 />
               ))
             : "Loading..."}
