@@ -6,6 +6,7 @@ import MusicContext from "../context/MusicContext";
 export default function App({ Component, pageProps }: AppProps) {
   const [categories, setCategories] = useState<any>([]);
   const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
+  const [newReleases, setNewReleases] = useState([]);
 
   return (
     <MusicContext.Provider
@@ -14,6 +15,8 @@ export default function App({ Component, pageProps }: AppProps) {
         setCategories,
         featuredPlaylists,
         setFeaturedPlaylists,
+        newReleases,
+        setNewReleases,
       }}
     >
       <Component {...pageProps} />

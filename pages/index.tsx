@@ -25,12 +25,15 @@ const getToken = async () => {
 export const getServerSideProps = async () => {
   let token = await getToken();
   //fetches user data
-  let userResponse = await fetch(`https://api.spotify.com/v1/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  let spotifyUser = await userResponse.json();
+  let newReleasesResponse = await fetch(
+    `https://api.spotify.com/v1/browse/new-releases`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  let spotifyNewReleases = await newReleasesResponse.json();
 
   //fetches categories
   let categoriesResponse = await fetch(
@@ -58,7 +61,7 @@ export const getServerSideProps = async () => {
     props: {
       spotifyCategories: spotifyCategories.categories,
       spotifyFeaturedPlaylists: spotifyFeaturedPlaylists.playlists,
-      spotifyUser,
+      spotifyNewReleases: spotifyNewReleases.albums,
     },
   };
 };
@@ -66,12 +69,18 @@ export const getServerSideProps = async () => {
 export default function Home({
   spotifyCategories,
   spotifyFeaturedPlaylists,
-  spotifyUser,
+  spotifyNewReleases,
 }: any) {
   // importing global states
   const musicContext = useContext(MusicContext);
-  const { categories, setCategories, featuredPlaylists, setFeaturedPlaylists } =
-    musicContext;
+  const {
+    categories,
+    setCategories,
+    featuredPlaylists,
+    setFeaturedPlaylists,
+    newReleases,
+    setNewReleases,
+  } = musicContext;
 
   // setting global states
   useEffect(() => {
@@ -82,6 +91,8 @@ export default function Home({
       spotifyFeaturedPlaylists
     )
       setFeaturedPlaylists(spotifyFeaturedPlaylists);
+    if (typeof newReleases.items === "undefined" && spotifyNewReleases)
+      setNewReleases(spotifyNewReleases);
   }, []);
 
   // responsive config for carousel component
@@ -146,6 +157,25 @@ export default function Home({
                   name={featured?.name}
                   src={featured.images?.[0].url}
                   description={featured?.description}
+                />
+              ))
+            : "Loading..."}
+        </Carousel>
+        <h2>New Releases:</h2>
+        <Carousel
+          itemAriaLabel="yes"
+          responsive={responsive}
+          className={styles.results}
+          infinite={true}
+          slidesToSlide={5}
+        >
+          {typeof newReleases.items !== "undefined"
+            ? newReleases.items.map((release: any) => (
+                <Thumbnail
+                  key={release?.id}
+                  style={styles.categories}
+                  name={release?.name}
+                  src={release?.images?.[0]?.url}
                 />
               ))
             : "Loading..."}
