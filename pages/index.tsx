@@ -126,7 +126,7 @@ export default function Home({
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <h2>Categories:</h2>
+        <h2>Categories</h2>
         <Carousel
           itemAriaLabel="yes"
           responsive={responsive}
@@ -147,7 +147,7 @@ export default function Home({
               ))
             : "Loading..."}
         </Carousel>
-        <h2>Featured Playlists:</h2>
+        <h2>Featured Playlists</h2>
         <Carousel
           itemAriaLabel="yes"
           responsive={responsive}
@@ -167,7 +167,7 @@ export default function Home({
               ))
             : "Loading..."}
         </Carousel>
-        <h2>New Releases:</h2>
+        <h2>New Releases</h2>
         <Carousel
           itemAriaLabel="yes"
           responsive={responsive}
