@@ -83,7 +83,7 @@ export default function Home({
     setNewReleases,
   } = musicContext;
 
-  console.log(spotifyNewReleases)
+  console.log(categories)
 
   // setting global states
   useEffect(() => {
@@ -136,12 +136,14 @@ export default function Home({
         >
           {typeof categories.items !== "undefined"
             ? categories.items.map((category: any) => (
-                <Thumbnail
-                  key={category?.id}
-                  style={styles.categories}
-                  name={category?.name}
-                  src={category.icons?.[0].url}
-                />
+                <Link href={`categories/${category?.id}`}>
+                  <Thumbnail
+                    key={category?.id}
+                    style={styles.categories}
+                    name={category?.name}
+                    src={category.icons?.[0].url}
+                  />
+                </Link>
               ))
             : "Loading..."}
         </Carousel>
@@ -175,7 +177,7 @@ export default function Home({
         >
           {typeof newReleases.items !== "undefined"
             ? newReleases.items.map((release: any) => (
-                <Link href={release?.id}>
+                <Link href={`newRelease/${release?.id}`}>
                   <Thumbnail
                     key={release?.id}
                     style={styles.categories}
