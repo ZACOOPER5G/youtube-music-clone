@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Thumbnail from "../components/Thumbnail";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Link from "next/link";
 
 const getToken = async () => {
   let response = await fetch(`https://accounts.spotify.com/api/token`, {
@@ -24,7 +25,7 @@ const getToken = async () => {
 
 export const getServerSideProps = async () => {
   let token = await getToken();
-  //fetches user data
+  //fetches new release data
   let newReleasesResponse = await fetch(
     `https://api.spotify.com/v1/browse/new-releases`,
     {
@@ -81,6 +82,8 @@ export default function Home({
     newReleases,
     setNewReleases,
   } = musicContext;
+
+  console.log(spotifyNewReleases)
 
   // setting global states
   useEffect(() => {
@@ -172,12 +175,14 @@ export default function Home({
         >
           {typeof newReleases.items !== "undefined"
             ? newReleases.items.map((release: any) => (
-                <Thumbnail
-                  key={release?.id}
-                  style={styles.categories}
-                  name={release?.name}
-                  src={release?.images?.[0]?.url}
-                />
+                <Link href={release?.id}>
+                  <Thumbnail
+                    key={release?.id}
+                    style={styles.categories}
+                    name={release?.name}
+                    src={release?.images?.[0]?.url}
+                  />
+                </Link>
               ))
             : "Loading..."}
         </Carousel>
