@@ -129,6 +129,7 @@ export default function Home({
           responsive={responsive}
           className={styles.results}
           infinite={true}
+          slidesToSlide={5}
         >
           {typeof categories.items !== "undefined"
             ? categories.items.map((category: any) => (
