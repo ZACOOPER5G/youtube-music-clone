@@ -83,7 +83,7 @@ export default function Home({
     setNewReleases,
   } = musicContext;
 
-  console.log(categories)
+  console.log(categories);
 
   // setting global states
   useEffect(() => {
@@ -157,13 +157,15 @@ export default function Home({
         >
           {typeof featuredPlaylists.items !== "undefined"
             ? featuredPlaylists.items.map((featured: any) => (
-                <Thumbnail
-                  key={featured?.id}
-                  style={styles.categories}
-                  name={featured?.name}
-                  src={featured.images?.[0].url}
-                  description={featured?.description}
-                />
+                <Link href={`featured/${featured?.id}`}>
+                  <Thumbnail
+                    key={featured?.id}
+                    style={styles.categories}
+                    name={featured?.name}
+                    src={featured.images?.[0].url}
+                    description={featured?.description}
+                  />
+                </Link>
               ))
             : "Loading..."}
         </Carousel>
