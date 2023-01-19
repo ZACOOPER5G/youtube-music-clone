@@ -48,7 +48,7 @@ export const getStaticProps = async (context: any) => {
   let token = await getToken();
 
   const categoriesId = await context.params.categories;
-  console.log(categoriesId)
+
   const categoriesResponse = await fetch(
     `https://api.spotify.com/v1/browse/categories/${categoriesId}`,
     {
@@ -58,8 +58,6 @@ export const getStaticProps = async (context: any) => {
     }
   );
   const category = await categoriesResponse.json();
-  console.log("id ", categoriesId);
-  console.log(category);
 
   return {
     props: { categories: category },
