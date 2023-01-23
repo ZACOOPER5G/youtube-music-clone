@@ -82,7 +82,8 @@ const NewRelease = ({ newRelease }: any) => {
           return artist.name;
         })}
         release={newRelease.release_date}
-        tracks={newRelease.total_tracks}
+        totalTracks={newRelease.total_tracks}
+        tracks={newRelease.tracks.items}
       />
       <Link href="/">
         <button>Go back home</button>

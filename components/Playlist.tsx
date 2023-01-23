@@ -8,10 +8,11 @@ type PlaylistProps = {
   type: string;
   artist: Array<string>;
   release: string;
-  tracks: number;
+  totalTracks: number;
+  tracks: Array<any>
 };
 
-const Playlist = ({ cover, name, type, artist, release, tracks }: PlaylistProps) => {
+const Playlist = ({ cover, name, type, artist, release, totalTracks, tracks }: PlaylistProps) => {
   return (
     <div>
       <div>
@@ -30,12 +31,13 @@ const Playlist = ({ cover, name, type, artist, release, tracks }: PlaylistProps)
             <h3>{release}</h3>
           </div>
           <div>
-            <h3>{tracks} songs</h3>
-
+            <h3>{totalTracks} songs</h3>
           </div>
         </div>
       </div>
-      <Track />
+      {tracks.map((track: any) => (
+        <Track track={track} />
+      ))}
     </div>
   );
 };

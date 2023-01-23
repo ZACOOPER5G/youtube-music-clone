@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Tracks = () => {
-  return (
-    <div>Tracks</div>
-  )
-}
+const Tracks = ({ track }: any) => {
+  return <div>{track.name}</div>;
+};
 
 export default Tracks
