@@ -179,7 +179,7 @@ export default function Home({
         >
           {typeof newReleases.items !== "undefined"
             ? newReleases.items.map((release: any) => (
-                <Link href={`newRelease/${release?.id}`}>
+                <Link href={`new-releases/${release?.id}`}>
                   <Thumbnail
                     key={release?.id}
                     style={styles.categories}
