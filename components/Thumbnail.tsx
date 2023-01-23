@@ -11,7 +11,7 @@ type ThumbnailProps = {
 
 const Thumbnail = ({ style, name, src, description }: ThumbnailProps) => {
   return (
-    <div className={`${style} ${styles.thumbnail}`}>
+    <div className={style}>
       <Image
         alt="category icon"
         src={src}
@@ -19,8 +19,8 @@ const Thumbnail = ({ style, name, src, description }: ThumbnailProps) => {
         width={275}
         layout="responsive"
       />
-      <h3>{name}</h3>
-      <p>{description && description}</p>
+      <h3 className={styles.text}>{name}</h3>
+      <p className={styles.text}>{description && description}</p>
     </div>
   );
 };

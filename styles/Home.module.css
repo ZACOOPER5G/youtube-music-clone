@@ -12,6 +12,10 @@
   margin: 12px;
 }
 
+.categories:hover {
+  transition: transform 0.2s ease-in-out;
+}
+
 .categories > li {
   margin-top: 12px;
 }
