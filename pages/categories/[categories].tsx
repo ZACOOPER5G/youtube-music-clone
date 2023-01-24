@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Playlist from "../../components/Playlist";
 
 const getToken = async () => {
   let response = await fetch(`https://accounts.spotify.com/api/token`, {
@@ -65,12 +66,21 @@ export const getStaticProps = async (context: any) => {
 };
 
 const Categories = ({ categories }: any) => {
+  console.log(categories)
+
   return (
     <>
       <Head>
         <title>YouTube Music | New Releases | {categories?.name}</title>
       </Head>
-      <div>{categories.name}</div>
+      <Playlist
+        cover={categories.icons[0]?.url}
+        name={categories.name}
+        type={categories.type}
+        release={categories.release_date}
+        totalTracks={4}
+        tracks={[]}
+      />
       <Link href="/">
         <button>Go back home</button>
       </Link>
