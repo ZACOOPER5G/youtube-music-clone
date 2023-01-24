@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Playlist from "../../components/Playlist";
 
 const getToken = async () => {
   let response = await fetch(`https://accounts.spotify.com/api/token`, {
@@ -64,12 +65,20 @@ export const getStaticProps = async (context: any) => {
 };
 
 const Featured = ({ featured }: any) => {
+    console.log(featured)
   return (
     <>
       <Head>
         <title>YouTube Music | New Releases | {featured?.name}</title>
       </Head>
-      <div>{featured.name}</div>
+      <Playlist
+        cover={featured.images[0].url}
+        name={featured.name}
+        type={featured.type}
+        release={featured.release_date}
+        totalTracks={featured.tracks.items.length}
+        tracks={featured.tracks.items}
+      />
       <Link href="/">
         <button>Go back home</button>
       </Link>

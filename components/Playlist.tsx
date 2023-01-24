@@ -6,7 +6,7 @@ type PlaylistProps = {
   cover: string;
   name: string;
   type: string;
-  artist: Array<string>;
+  artist?: Array<string>;
   release: string;
   totalTracks: number;
   tracks: Array<any>
@@ -36,7 +36,7 @@ const Playlist = ({ cover, name, type, artist, release, totalTracks, tracks }: P
         </div>
       </div>
       {tracks.map((track: any) => (
-        <Track track={track} />
+        <Track track={track} key={track.id || track.track.id} />
       ))}
     </div>
   );
