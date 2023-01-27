@@ -83,8 +83,6 @@ export default function Home({
     setNewReleases,
   } = musicContext;
 
-  console.log(categories);
-
   // setting global states
   useEffect(() => {
     if (typeof categories.items === "undefined" && spotifyCategories)
